@@ -5,7 +5,8 @@ var app = express();
 
 var mongodb = require('mongodb');
 var mongoose = require('mongoose')
-var Bing = require('node-bing-api')({ accKey: "wrffrQVe5/sl9SM4ULyIUHeOSaIVGoISmHN7cx7j330" })
+var Bing = require('node-bing-api')({ accKey: MONGOLAB_KEY })
+//"wrffrQVe5/sl9SM4ULyIUHeOSaIVGoISmHN7cx7j330"
 var MongoClient = mongodb.MongoClient;
 
 
@@ -14,8 +15,9 @@ var MongoClient = mongodb.MongoClient;
 
 var url =  process.env.MONGOLAB_URI; 
 
-var url = 'mongodb://zakr:jessica1qq@ds041566.mlab.com:41566/zrsearch'
-app.listen('3000',function(){
+var url = MONGOLAB_URI
+//'mongodb://zakr:jessica1qq@ds041566.mlab.com:41566/zrsearch'
+app.listen(process.env.PORT ||'3000',function(){
   console.log("this is working")
 })
 
