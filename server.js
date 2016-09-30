@@ -36,8 +36,8 @@ router.post('/login', passport.authenticate('login', {
  app.get('/favicon.ico', function(req, res) {
     res.send(200);
 })
- /*
-app.get('/*', function(req, res) {
+
+app.get('/*', function(req, res) { /*
   var input = req.path.substr(30)
   searchcount=(req.query.offset||10);
   if (searchcount>10){
@@ -118,5 +118,6 @@ Bing.images(terms, {
   
   }
  );
-
-});*/
+*/
+res,send("test")
+});
