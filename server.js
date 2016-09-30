@@ -6,7 +6,7 @@ var app = express();
 var mongodb = require('mongodb');
 var mongoose = require('mongoose')
 var Bing = require('node-bing-api')({ accKey: process.env.MONGOLAB_KEY })
-//"wrffrQVe5/sl9SM4ULyIUHeOSaIVGoISmHN7cx7j330" MONGOLAB_KEY
+
 var MongoClient = mongodb.MongoClient;
 
 
@@ -16,7 +16,7 @@ var MongoClient = mongodb.MongoClient;
 var url =  process.env.MONGOLAB_URI; 
 
 
-//'mongodb://zakr:jessica1qq@ds041566.mlab.com:41566/zrsearch'
+
 app.listen( process.env.PORT || 3000)
 
  var db=mongoose.connect(url, function (err, db) {
@@ -38,7 +38,7 @@ router.post('/login', passport.authenticate('login', {
 })
 
 app.get('/*', function(req, res) { 
-  var input = req.path.substr(30)
+  var input = req.path.substr(1)
   searchcount=(req.query.offset||10);
   if (searchcount>10){
     searchcount=10
@@ -50,16 +50,14 @@ app.get('/*', function(req, res) {
     })
   } else{
     terms=input.split('%20')}
-    /*schema.update(
+    schema.update(
                     {unique:"unique"},
                     {$push: {"array":{term: terms, when: "now"}} })
 
    
   schema.findOne({unique:"unique"},function(err, link) {
-
+    //make database if non-existst
     if(!link){
-   // console.log(URL)
-    //URL.count({},function(err,count){console.log(count)})
     
            newvaule = new schema({unique: "unique", array: {term: terms, when: "now"}})
             newvaule.save(function(err){
@@ -71,23 +69,23 @@ app.get('/*', function(req, res) {
 
                    
                 } else{
+                  //if there is a database add last search and remove the oldest if there are more than 10
                   var search = {term:terms, when:"now"}
                   
                   link.array.unshift({term: terms, when: Date()})
                   
-                  console.log(link.array)
+                  
                   if(link.array.length>10){
                     link.array.pop();
                   }
-                  console.log(link.array)
-                  console.log("end line")
+                  
                   link.save()
                 }
 
 
     
 
-  })
+ 
 
  
 Bing.images(terms, {
@@ -95,7 +93,8 @@ Bing.images(terms, {
     imageFilters: {
      
     }
-  }, function(error, rez, body){
+  }, function(error, response, body){
+    console.log(body)
      if (body.d && body.d.results) {
 
       var  items=body.d.results;
@@ -119,5 +118,6 @@ Bing.images(terms, {
   }
  );
 
-res.send("test")
+ })
+
 });
