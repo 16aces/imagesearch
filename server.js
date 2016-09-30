@@ -5,7 +5,7 @@ var app = express();
 
 var mongodb = require('mongodb');
 var mongoose = require('mongoose')
-var Bing = require('node-bing-api')({ accKey: "wrffrQVe5/sl9SM4ULyIUHeOSaIVGoISmHN7cx7j330" })
+var Bing = require('node-bing-api')({ accKey: process.env.MONGOLAB_KEY })
 //"wrffrQVe5/sl9SM4ULyIUHeOSaIVGoISmHN7cx7j330" MONGOLAB_KEY
 var MongoClient = mongodb.MongoClient;
 
@@ -119,5 +119,5 @@ Bing.images(terms, {
   }
  );
 */
-res,send("test")
+res.send("test")
 });
