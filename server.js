@@ -17,9 +17,7 @@ var url =  process.env.MONGOLAB_URI;
 
 var url = MONGOLAB_URI
 //'mongodb://zakr:jessica1qq@ds041566.mlab.com:41566/zrsearch'
-app.listen(process.env.PORT ||'3000',function(){
-  console.log("this is working")
-})
+app.listen( process.env.PORT || 3000)
 
  var db=mongoose.connect(url, function (err, db) {
       //console.log("test")
